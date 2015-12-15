@@ -1,11 +1,19 @@
 <div class="row">
   <div class="col-sm-offset-2 col-sm-3 text-center">
     <h2 class='text-center'>Work time</h2>
-    <h3 class='text-center'><i class="fa fa-minus"></i> 25 <i class="fa fa-plus"></i></h3>
+    <h3 class='text-center'>
+      <button ng-click='minusWorkTime()'><i class="fa fa-minus"></i></button>
+        {{workTime}}
+      <button ng-click='addWorkTime()'><i class="fa fa-plus"></i></button>
+    </h3>
   </div>
   <div class="col-sm-offset-2 col-sm-3 text-center">
-    <h2>Break time</h2>
-    <h3><i class="fa fa-minus"></i> 5 <i class="fa fa-plus"></i></h3>
+    <h2 class="text-center">Break time</h2>
+    <h3 class="text-center">
+      <button ng-click='minusBreakTime()'><i class="fa fa-minus"></i></button>
+        {{breakTime}}
+      <button ng-click='addBreakTime()'><i class="fa fa-plus"></i></button>
+    </h3>
   </div>
 </div>
 
@@ -13,7 +21,7 @@
   <div class="col-sm-12 text-center">
     <div id="pomodoro">
       <h1>Work</h1>
-      <h1>25 : 00</h1>
+      <h1>{{workTime | minutesToDateTime | date:'mm:ss'}}</h1>
     </div>
   </div>
 </div>

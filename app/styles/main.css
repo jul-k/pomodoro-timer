@@ -12,6 +12,14 @@ h2, h3 {
   padding: 5px;
 }
 
+button {
+  background-color: #787878;
+}
+
+button:focus {
+  outline:0;
+}
+
 #pomodoro {
   height: 300px;
   width: 300px;
@@ -19,6 +27,7 @@ h2, h3 {
   border-radius: 50%;
   display: inline-block;
   margin-top: 50px;
+  cursor: pointer;
 }
 
 h1:first-child {
