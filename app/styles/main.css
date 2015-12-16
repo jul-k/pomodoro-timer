@@ -8,7 +8,7 @@ body {
 }
 
 h2, h3 {
-  display: inline-block;
+  display: block;
   padding: 5px;
 }
 

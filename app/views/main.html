@@ -19,9 +19,9 @@
 
 <div class="row">
   <div class="col-sm-12 text-center">
-    <div id="pomodoro">
+    <div id="pomodoro" ng-click='startCountDown()'>
       <h1>Work</h1>
-      <h1>{{workTime | minutesToDateTime | date:'mm:ss'}}</h1>
+      <h1>{{counter | asMinutes}}</h1>
     </div>
   </div>
 </div>
