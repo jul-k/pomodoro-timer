@@ -1,10 +1,10 @@
-<div class="row" ng-init="workTime = 5">
+<div class="row" ng-init="startingTime = 5; nextPath='/'">
   <div class="col-sm-offset-4 col-sm-4 text-center">
     <h2 class="text-center">Break time</h2>
     <h3 class="text-center">
-      <button ng-click='minusBreakTime()'><i class="fa fa-minus"></i></button>
-        {{breakTime}}
-      <button ng-click='addBreakTime()'><i class="fa fa-plus"></i></button>
+      <button ng-click='minusTime()'><i class="fa fa-minus"></i></button>
+        {{startingTime}}
+      <button ng-click='addTime()'><i class="fa fa-plus"></i></button>
     </h3>
   </div>
 </div>

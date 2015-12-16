@@ -12,39 +12,23 @@ var app = angular.module('pomodoroApp');
 
 app.constant("$moment", moment);
 
-app.controller('MainCtrl',  ['$scope', '$timeout', function($scope, $timeout) {
+app.controller('MainCtrl',  ['$scope', '$timeout', '$location', function($scope, $timeout, $location) {
 
-    $scope.workTime = 25;
-    $scope.breakTime = 5;
+    $scope.startingTime = 25;
     $scope.running = false;
-    $scope.counter = $scope.workTime * 60;
-    $scope.breakCounter = $scope.breakTime * 60;
+    $scope.counter = $scope.startingTime * 60;
 
     var stopped;
 
-    $scope.addWorkTime = function() {
-        $scope.workTime = $scope.workTime + 1;
+    $scope.addMinute = function() {
+        $scope.startingTime = $scope.startingTime + 1;
     }
 
-    $scope.minusWorkTime = function() {
-        if($scope.workTime > 1) {
-            $scope.workTime = $scope.workTime - 1;
+    $scope.minusMinute = function() {
+        if($scope.startingTime > 1) {
+            $scope.startingTime = $scope.startingTime - 1;
         } else {
-            $scope.workTime = 1;
-        }
-    }
-
-    $scope.addBreakTime = function() {
-        $scope.breakTime = $scope.breakTime + 1;
-        $scope.breakCounter = $scope.breakTime * 60;
-    }
-
-    $scope.minusBreakTime = function() {
-        if($scope.breakTime > 1) {
-            $scope.breakTime = $scope.breakTime - 1;
-            $scope.breakCounter = $scope.breakTime * 60;
-        } else {
-            $scope.breakTime = 1;
+            $scope.startingTime = 1;
         }
     }
 
@@ -57,6 +41,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', function($scope, $timeout) {
             }, 1000);
         } else {
             $scope.running = false;
+            $location.path($scope.nextPath || "/break");
         }
     }
 
@@ -81,8 +66,8 @@ app.controller('MainCtrl',  ['$scope', '$timeout', function($scope, $timeout) {
         }
     }
 
-    $scope.$watch('workTime', function() {
-       $scope.counter = $scope.workTime * 60;
+    $scope.$watch('startingTime', function() {
+       $scope.counter = $scope.startingTime * 60;
     });
 
 }]);
