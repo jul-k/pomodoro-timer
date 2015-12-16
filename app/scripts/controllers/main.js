@@ -21,7 +21,12 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', function($scope,
     var stopped;
 
     $scope.addMinute = function() {
-        $scope.startingTime = $scope.startingTime + 1;
+        if ($scope.startingTime < 59) {
+            $scope.startingTime = $scope.startingTime + 1;
+        } else {
+            alert("Don't work too much. You need to take a break soon. ;-)");
+            $scope.startingTime = 59;
+        }
     }
 
     $scope.minusMinute = function() {
