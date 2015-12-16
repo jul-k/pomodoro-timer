@@ -24,7 +24,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', function($scope,
         if ($scope.startingTime < 59) {
             $scope.startingTime = $scope.startingTime + 1;
         } else {
-            alert("Don't work too much. You need to take a break soon. ;-)");
+            alert("Don't forget about pomodoro technique! Set a little bit shorter interval. ;-)");
             $scope.startingTime = 59;
         }
     }
