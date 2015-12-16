@@ -18,6 +18,8 @@ app.controller('MainCtrl',  ['$scope', '$timeout', function($scope, $timeout) {
     $scope.breakTime = 5;
     $scope.running = false;
     $scope.counter = $scope.workTime * 60;
+    $scope.breakCounter = $scope.breakTime * 60;
+
     var stopped;
 
     $scope.addWorkTime = function() {
@@ -34,33 +36,54 @@ app.controller('MainCtrl',  ['$scope', '$timeout', function($scope, $timeout) {
 
     $scope.addBreakTime = function() {
         $scope.breakTime = $scope.breakTime + 1;
+        $scope.breakCounter = $scope.breakTime * 60;
     }
 
     $scope.minusBreakTime = function() {
         if($scope.breakTime > 1) {
             $scope.breakTime = $scope.breakTime - 1;
+            $scope.breakCounter = $scope.breakTime * 60;
         } else {
             $scope.breakTime = 1;
         }
     }
 
     $scope.countdown = function() {
-        stopped = $timeout(function() {
-            console.log($scope.counter);
-            $scope.counter--;
-            $scope.countdown();
-        }, 1000);
+        if($scope.counter >= 1) {
+            stopped = $timeout(function() {
+                console.log($scope.counter);
+                $scope.counter--;
+                $scope.countdown();
+            }, 1000);
+        } else {
+            $scope.running = false;
+        }
     }
-
 
     $scope.stop = function() {
         $timeout.cancel(stopped);
+        $scope.running = false;
     }
 
     $scope.startCountDown = function() {
-        $scope.counter = $scope.workTime * 60;
+        if ($scope.running === true) {
+            return;
+        }
+        $scope.running = true;
         $scope.countdown();
     }
+
+    $scope.toggleCounter = function() {
+        if ($scope.running) {
+            $scope.stop();
+        } else {
+            $scope.startCountDown();
+        }
+    }
+
+    $scope.$watch('workTime', function() {
+       $scope.counter = $scope.workTime * 60;
+    });
 
 }]);
 
