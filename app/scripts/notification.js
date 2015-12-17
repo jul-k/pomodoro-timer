@@ -8,7 +8,10 @@ function notifyMe(message) {
                 icon: "../images/favicon.png",
                 dir : "ltr"
              };
-          var notification = new Notification("Hi there",options);
+          var sound = document.getElementById('sound');
+          console.log(sound);
+          sound.play();
+          var notification = new Notification("Hi there.",options);
   }
   else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
@@ -22,6 +25,7 @@ function notifyMe(message) {
               icon: "../images/favicon.png",
               dir : "ltr"
           };
+        document.getElementById('sound').play();
         var notification = new Notification("Hi there.",options);
       }
     });

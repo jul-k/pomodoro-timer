@@ -46,8 +46,12 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', function($scope,
             }, 1000);
         } else {
             $scope.running = false;
-            $location.path($scope.nextPath || "/break");
             notifyMe('Time is out! ;-)');
+
+            $timeout(function() {
+                $location.path($scope.nextPath || "/break");
+            }, 2000);
+
         }
     }
 
