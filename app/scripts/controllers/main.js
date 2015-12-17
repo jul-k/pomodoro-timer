@@ -12,8 +12,7 @@ var app = angular.module('pomodoroApp');
 
 app.constant("$moment", moment);
 
-
-app.factory('SettingsStorage', ['localStorageService', function(localStorageService){
+app.factory('SettingsStorage', ['localStorageService', function(localStorageService) {
     var defaults = {
         'work': 25,
         'break': 5
@@ -22,11 +21,11 @@ app.factory('SettingsStorage', ['localStorageService', function(localStorageServ
     var self = {};
 
     self.getByLabel = function(labelName) {
-          var val = localStorageService.get(labelName);
-          return val || defaults[labelName]
-       }
+        var val = localStorageService.get(labelName);
+        return val || defaults[labelName]
+    }
 
-    self.setValue = function (labelName, value) {
+    self.setValue = function(labelName, value) {
         localStorageService.set(labelName, value)
     }
     return self
@@ -38,13 +37,13 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
     $scope.label = 'work';
     $scope.startingTime = SettingsStorage.getByLabel($scope.label);
 
-    $scope.Init = function (labelName) {
+    $scope.Init = function(labelName) {
         $scope.label = labelName;
         $scope.startingTime = SettingsStorage.getByLabel(labelName);
     }
 
-    $scope.$watch('startingTime', function () {
-      SettingsStorage.setValue($scope.label, $scope.startingTime)
+    $scope.$watch('startingTime', function() {
+        SettingsStorage.setValue($scope.label, $scope.startingTime)
     }, true);
 
     $scope.running = false;
@@ -62,7 +61,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
     }
 
     $scope.minusMinute = function() {
-        if($scope.startingTime > 1) {
+        if ($scope.startingTime > 1) {
             $scope.startingTime = $scope.startingTime - 1;
         } else {
             $scope.startingTime = 1;
@@ -70,7 +69,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
     }
 
     $scope.countdown = function() {
-        if($scope.counter >= 1) {
+        if ($scope.counter >= 1) {
             stopped = $timeout(function() {
                 console.log($scope.counter);
                 $scope.counter--;
@@ -108,7 +107,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
     }
 
     $scope.$watch('startingTime', function() {
-       $scope.counter = $scope.startingTime * 60;
+        $scope.counter = $scope.startingTime * 60;
     });
 
 }]);
