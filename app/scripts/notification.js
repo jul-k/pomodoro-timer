@@ -9,7 +9,6 @@ function notifyMe(message) {
                 dir : "ltr"
              };
           var sound = document.getElementById('sound');
-          console.log(sound);
           sound.play();
           var notification = new Notification("Hi there.",options);
   }

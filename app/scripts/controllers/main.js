@@ -12,9 +12,41 @@ var app = angular.module('pomodoroApp');
 
 app.constant("$moment", moment);
 
-app.controller('MainCtrl',  ['$scope', '$timeout', '$location', function($scope, $timeout, $location) {
 
-    $scope.startingTime = 25;
+app.factory('SettingsStorage', ['localStorageService', function(localStorageService){
+    var defaults = {
+        'work': 25,
+        'break': 5
+    }
+
+    var self = {};
+
+    self.getByLabel = function(labelName) {
+          var val = localStorageService.get(labelName);
+          return val || defaults[labelName]
+       }
+
+    self.setValue = function (labelName, value) {
+        localStorageService.set(labelName, value)
+    }
+    return self
+
+}])
+
+app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage', function($scope, $timeout, $location, SettingsStorage) {
+
+    $scope.label = 'work';
+    $scope.startingTime = SettingsStorage.getByLabel($scope.label);
+
+    $scope.Init = function (labelName) {
+        $scope.label = labelName;
+        $scope.startingTime = SettingsStorage.getByLabel(labelName);
+    }
+
+    $scope.$watch('startingTime', function () {
+      SettingsStorage.setValue($scope.label, $scope.startingTime)
+    }, true);
+
     $scope.running = false;
     $scope.counter = $scope.startingTime * 60;
 
@@ -51,7 +83,6 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', function($scope,
             $timeout(function() {
                 $location.path($scope.nextPath || "/break");
             }, 2000);
-
         }
     }
 
