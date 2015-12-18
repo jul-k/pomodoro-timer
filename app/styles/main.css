@@ -30,6 +30,16 @@ button:focus {
   cursor: pointer;
 }
 
+.fill {
+  content: '';
+  position: absolute;
+  background: green;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+}
+
 h1:first-child {
   margin-top: 30%;
 }

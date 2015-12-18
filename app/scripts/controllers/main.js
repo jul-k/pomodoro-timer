@@ -48,6 +48,8 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
 
     $scope.running = false;
     $scope.counter = $scope.startingTime * 60;
+    $scope.fillHeight = '0%';
+    $scope.fillColor = '#787878';
 
     var stopped;
 
