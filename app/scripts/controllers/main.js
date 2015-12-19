@@ -44,6 +44,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
 
     $scope.$watch('startingTime', function() {
         SettingsStorage.setValue($scope.label, $scope.startingTime)
+        $scope.counter = $scope.startingTime * 60;
     }, true);
 
     $scope.running = false;
@@ -101,6 +102,7 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
     }
 
     $scope.toggleCounter = function() {
+        $scope.fillColor = '#A20404';
         if ($scope.running) {
             $scope.stop();
         } else {
@@ -108,8 +110,9 @@ app.controller('MainCtrl',  ['$scope', '$timeout', '$location', 'SettingsStorage
         }
     }
 
-    $scope.$watch('startingTime', function() {
-        $scope.counter = $scope.startingTime * 60;
+    $scope.$watch('counter', function() {
+        var perc = Math.abs((($scope.startingTime * 60 - $scope.counter) / ($scope.startingTime * 60)) * 100);
+        $scope.fillHeight = perc + '%';
     });
 
 }]);
